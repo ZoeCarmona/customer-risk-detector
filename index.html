@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Customer Risk Radar</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
+</head>
+<body>
+    <div class="container">
+        <header>
+        <section class="hero">
+            <h1>Customer Risk Radar</h1>
+            <h2>Detección temprana de clientes en riesgo</h2>
+            <p>
+            Prototipo conceptual para identificar señales tempranas de inconformidad en clientes
+            corporativos a partir de métricas operativas como nivel de servicio, puntualidad,
+            NPS y quejas abiertas.
+            </p>
+        </section>
+        </header>
+
+        <main>
+            <section class="grid">
+                <article class="card">
+                <h3>Captura de datos del cliente</h3>
+
+                <p class="section-title">Datos generales</p>
+                <div class="form-grid">
+                    <div class="field full">
+                    <label for="cliente">Nombre del cliente</label>
+                    <input type="text" id="cliente" value="Cliente Alfa" />
+                    </div>
+
+                    <div class="field">
+                    <label for="periodo-actual">Periodo actual</label>
+                    <input type="text" id="periodo-actual" value="Abril 2026" />
+                    </div>
+
+                    <div class="field">
+                    <label for="periodo-anterior">Periodo anterior</label>
+                    <input type="text" id="periodo-anterior" value="Marzo 2026" />
+                    </div>
+                </div>
+
+                <p class="section-title">Métricas operativas</p>
+                <div class="form-grid">
+                    <div class="field">
+                    <label for="servicio-actual">Nivel de servicio actual (%)</label>
+                    <input type="text" id="servicio-actual" value="84" />
+                    </div>
+
+                    <div class="field">
+                    <label for="servicio-anterior">Nivel de servicio anterior (%)</label>
+                    <input type="text" id="servicio-anterior" value="92" />
+                    </div>
+
+                    <div class="field">
+                    <label for="puntualidad-actual">Puntualidad actual (%)</label>
+                    <input type="text" id="puntualidad-actual" value="81" />
+                    </div>
+
+                    <div class="field">
+                    <label for="puntualidad-anterior">Puntualidad anterior (%)</label>
+                    <input type="text" id="puntualidad-anterior" value="93" />
+                    </div>
+
+                    <div class="field">
+                    <label for="nps-actual">NPS actual</label>
+                    <input type="text" id="nps-actual" value="10" />
+                    </div>
+
+                    <div class="field">
+                    <label for="nps-anterior">NPS anterior</label>
+                    <input type="text" id="nps-anterior" value="35" />
+                    </div>
+
+                    <div class="field">
+                    <label for="quejas-actuales">Quejas abiertas actuales</label>
+                    <input type="text" id="quejas-actuales" value="6" />
+                    </div>
+
+                    <div class="field">
+                    <label for="quejas-anteriores">Quejas abiertas anteriores</label>
+                    <input type="text" id="quejas-anteriores" value="1" />
+                    </div>
+                </div>
+
+                <button class="btn">Evaluar cliente</button>
+                </article>
+
+                <article class="card">
+                <h3>Resultado del análisis</h3>
+
+                <div class="risk-box">
+                    <p class="risk-label">Semáforo de riesgo del cliente</p>
+                    <div class="risk-status">
+                    <span class="dot"></span>
+                    <span>ALTO</span>
+                    </div>
+                </div>
+
+                <div class="info-block">
+                    <h4>Diagnóstico</h4>
+                    <p>
+                    El cliente presenta un nivel de riesgo alto debido a una disminución en la
+                    puntualidad, una caída en el NPS, una reducción en el nivel de servicio y un
+                    aumento considerable en las quejas abiertas. Estas señales indican deterioro
+                    simultáneo en la experiencia y operación del servicio.
+                    </p>
+                </div>
+
+                <div class="info-block">
+                    <h4>Métricas detectadas</h4>
+                    <ul>
+                    <li><strong>Nivel de servicio:</strong> 92% → 84%</li>
+                    <li><strong>Puntualidad:</strong> 93% → 81%</li>
+                    <li><strong>NPS:</strong> 35 → 10</li>
+                    <li><strong>Quejas abiertas:</strong> 1 → 6</li>
+                    </ul>
+                </div>
+
+                <div class="info-block">
+                    <h4>Acciones recomendadas</h4>
+                    <ul>
+                    <li>Contactar de inmediato al cliente.</li>
+                    <li>Revisar causas operativas del deterioro.</li>
+                    <li>Definir un plan correctivo con fechas.</li>
+                    <li>Dar seguimiento prioritario a la cuenta.</li>
+                    </ul>
+                </div>
+                </article>
+            </section>
+
+            <section class="card logic-card">
+                <h3>¿Cómo evalúa el sistema al cliente?</h3>
+                <p>
+                El sistema compara las métricas del periodo actual contra las del periodo anterior.
+                Si detecta deterioros en puntualidad, nivel de servicio, NPS o quejas abiertas,
+                clasifica el riesgo del cliente como bajo, medio o alto y propone acciones preventivas
+                para una atención más oportuna.
+                </p>
+            </section>
+        </main>
+
+        <footer>
+        <p>Prototipo web conceptual desarrollado para el Hackatón Bécalos Traxión Tech 2026.</p>
+        </footer>
+    </div>
+</body>
+</html>
