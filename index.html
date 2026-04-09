@@ -8,8 +8,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </head>
 <body>
 
@@ -76,14 +78,23 @@
             <span id="user-location">SALTILLO, COAHUILA</span>
           </div>
         </div>
-
-        <div class="hdr-badge"></div>
       </div>
       <div class="hdr-rule"></div>
     </header>
 
     <main class="main-content">
       
+      <div class="accessibility-control" style="display: flex; align-items: center; gap: 12px; background: rgba(200, 224, 0, 0.1); padding: 12px 18px; border-radius: 10px; margin-bottom: 20px; border: 1px solid #c8e000;">
+        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; color: var(--text-primary); font-weight: 600; font-size: 14px;">
+          <span id="voice-icon" style="font-size: 18px;">🔇</span> 
+          Lectura por voz (Accesibilidad)
+        </label>
+        <label class="switch" style="position: relative; display: inline-block; width: 44px; height: 22px;">
+          <input type="checkbox" id="voice-toggle" style="opacity: 0; width: 0; height: 0;">
+          <span class="slider round"></span>
+        </label>
+      </div>
+
       <div class="info-banner" style="margin-bottom: 20px; border-color: var(--green); background: rgba(200, 224, 0, 0.05);">
           <div class="info-banner-icon" style="background: rgba(46, 204, 113, 0.1); color: var(--green);">
               <span style="font-size: 20px;">🛡️</span>
@@ -91,7 +102,7 @@
           <div>
               <p style="margin: 0; font-weight: 800; color: var(--green); font-size: 14px; text-transform: uppercase;">Estado de Seguridad</p>
               <p style="margin: 0; font-size: 13px; color: var(--text2);">
-                  Llevamos <strong id="dias-sin-incidentes" style="color: var(--green);">124</strong> días cuidando a nuestros clientes con éxito.
+                  Llevamos <strong id="dias-sin-incidentes" style="color: var(--green);">124</strong> días sin incidencias críticas.
               </p>
           </div>
       </div>
@@ -103,65 +114,70 @@
         </div>
         <div class="kpi kpi--red">
           <div class="kpi-val" id="kpi-rojo">0</div>
-          <div class="kpi-label">Atención Urgente</div>
+          <div class="kpi-label">Críticos</div>
         </div>
         <div class="kpi kpi--amber">
           <div class="kpi-val" id="kpi-amarillo">0</div>
-          <div class="kpi-label">Atención Media</div>
+          <div class="kpi-label">En Observación</div>
         </div>
         <div class="kpi kpi--green">
           <div class="kpi-val" id="kpi-verde">0</div>
-          <div class="kpi-label">Clientes Felices</div>
+          <div class="kpi-label">Saludables</div>
         </div>
       </section>
 
       <div class="main-grid">
         <article class="card">
           <div class="card-header">
-            <h2 class="card-title">Paso 1: Datos del Cliente</h2>
+            <h2 class="card-title">Paso 1: Entrada de Datos</h2>
           </div>
+
+          <div class="excel-upload-zone" style="border: 2px dashed rgba(200, 224, 0, 0.3); padding: 15px; border-radius: 10px; text-align: center; margin-bottom: 20px; background: rgba(255,255,255,0.02);">
+            <label class="field-label" style="display: block; margin-bottom: 8px; color: #c8e000;">📊 CARGA MASIVA (EXCEL)</label>
+            <input type="file" id="excel-file" accept=".xlsx, .xls" style="font-size: 12px; color: #888; width: 100%;" />
+            <p style="font-size: 10px; color: #666; margin-top: 8px;">Columnas: Cliente, ServicioActual, ServicioAnterior, NPS, Quejas</p>
+          </div>
+
           <form id="risk-form">
             <div class="field">
-              <label class="field-label">Nombre de la Empresa</label>
-              <input type="text" id="cliente" class="field-input" placeholder="Escriba el nombre aquí" required />
+              <label class="field-label" for="cliente">Nombre de la Empresa</label>
+              <input type="text" id="cliente" class="field-input" placeholder="Ej. Logística Global" required />
             </div>
             
             <div class="field-group">
               <div class="field">
-                <label class="field-label">Calidad de Servicio (%)</label>
-                <p style="font-size: 11px; color: #888; margin: -5px 0 5px 0;">¿Qué tan bien cumplimos hoy vs el mes pasado?</p>
+                <label class="field-label" for="servicio-actual">Calidad de Servicio (%)</label>
                 <div style="display: flex; gap: 10px;">
-                    <input type="number" id="servicio-actual" class="field-input" placeholder="Hoy %" min="0" max="100" required />
-                    <input type="number" id="servicio-anterior" class="field-input" placeholder="Antes %" min="0" max="100" required />
+                    <input type="number" id="servicio-actual" class="field-input" placeholder="Actual" min="0" max="100" required />
+                    <input type="number" id="servicio-anterior" class="field-input" placeholder="Anterior" min="0" max="100" required />
                 </div>
               </div>
               
               <div class="field">
-                <label class="field-label">Felicidad y Quejas</label>
-                <p style="font-size: 11px; color: #888; margin: -5px 0 5px 0;">Nivel de agrado (NPS) y número de reportes.</p>
+                <label class="field-label" for="nps-actual">Felicidad (NPS) y Quejas</label>
                 <div style="display: flex; gap: 10px;">
-                    <input type="number" id="nps-actual" class="field-input" placeholder="Felicidad" required />
+                    <input type="number" id="nps-actual" class="field-input" placeholder="NPS" required />
                     <input type="number" id="quejas-actuales" class="field-input" placeholder="Quejas" required />
                 </div>
               </div>
             </div>
             
-            <button type="submit" class="btn-eval" id="btn-eval" style="font-size: 16px; padding: 18px;">
-                🔍 ANALIZAR AHORA
+            <button type="submit" class="btn-eval" id="btn-eval">
+                🔍 ANALIZAR RIESGO
             </button>
           </form>
         </article>
 
         <article class="card result-card">
           <div class="card-header">
-            <h2 class="card-title">Paso 2: Diagnóstico de la IA</h2>
+            <h2 class="card-title">Paso 2: Diagnóstico IA</h2>
           </div>
           <div id="resultado-area">
              <div class="empty-state">
-                <p>Aquí aparecerán los resultados después de presionar el botón de analizar.</p>
+                <p>Esperando datos para generar informe...</p>
              </div>
           </div>
-          <div style="margin-top: 20px; height: 180px; position: relative;">
+          <div style="margin-top: 20px; height: 180px;">
             <canvas id="riskChart"></canvas>
           </div>
         </article>
@@ -169,33 +185,31 @@
 
       <section class="card history-section" style="margin-top: 20px;">
         <div class="card-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
-          <h2 class="card-title">Buscador de Registros Anteriores</h2>
-          
+          <h2 class="card-title">Buscador de Registros</h2>
           <div class="search-container" style="min-width: 300px;">
-            <input type="text" id="search-history" class="field-input" placeholder="🔎 Escriba nombre del cliente para buscar..." style="padding: 12px 16px; font-size: 14px;">
+            <input type="text" id="search-history" class="field-input" placeholder="🔎 Buscar por nombre de empresa...">
           </div>
         </div>
 
-        <div class="table-container" style="overflow-x: auto;">
-          <table class="history-table" style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+        <div class="table-container">
+          <table class="history-table" style="width: 100%;">
             <thead>
-              <tr style="text-align: left; color: var(--text4); font-size: 0.85rem; border-bottom: 2px solid rgba(255,255,255,0.1); text-transform: uppercase;">
-                <th style="padding: 15px;">Empresa</th>
-                <th style="padding: 15px;">Servicio</th>
-                <th style="padding: 15px;">Felicidad</th>
-                <th style="padding: 15px;">Resultado</th>
+              <tr>
+                <th>Empresa</th>
+                <th>Servicio</th>
+                <th>Felicidad</th>
+                <th>Resultado</th>
               </tr>
             </thead>
-            <tbody id="history-body">
-              </tbody>
+            <tbody id="history-body"></tbody>
           </table>
         </div>
       </section>
 
     </main>
 
-    <footer class="ftr" style="text-align: center; padding: 30px; opacity: 0.7;">
-      <p>Bécalos Tech Challenge 2026 · <strong>Fundación Traxión </strong></p>
+    <footer class="ftr">
+      <p>Bécalos Tech Challenge 2026 · <strong>Fundación Traxión</strong></p>
     </footer>
   </div>
 
