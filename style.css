@@ -397,3 +397,85 @@ body {
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; }
 }
+
+/* ── COMPONENTES DE RIESGO PREDICTIVO (SOLO LO NECESARIO) ── */
+/* ── COMPONENTES DE RIESGO PREDICTIVO (OPTIMIZADO) ── */
+
+/* Contenedor del resultado dinámico */
+.result-display {
+    -webkit-print-color-adjust: exact !important; /* Forzar colores en Chrome/Safari */
+    print-color-adjust: exact !important;         /* Estándar */
+    background-color: #0a0a0a !important;        /* Fondo sólido oscuro */
+    color: white !important;
+}
+
+/* Barra de progreso de riesgo */
+.risk-meter-bg {
+    background: #1a1a1a;
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 8px;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+.risk-meter-fill {
+    height: 100%;
+    transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Estilos específicos para el botón de PDF dentro del informe */
+.btn-pdf {
+    width: 100%;
+    background: var(--lime);
+    color: #000;
+    border: none;
+    padding: 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 900;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 15px;
+    transition: transform 0.2s, background 0.2s;
+}
+
+.btn-pdf:hover {
+    background: var(--lime-bright);
+    transform: translateY(-2px);
+}
+
+/* Badges del historial */
+.badge {
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    display: inline-block;
+    font-family: var(--font-mono);
+}
+
+.badge-bajo { 
+    background: rgba(46, 204, 113, 0.15); 
+    color: var(--green); 
+}
+
+.badge-amarillo { 
+    background: rgba(245, 166, 35, 0.15); 
+    color: var(--amber); 
+}
+
+.badge-alto { 
+    background: rgba(232, 69, 60, 0.15); 
+    color: var(--red); 
+}
+
+/* Ajuste para que las tablas se vean bien en móviles */
+#history-body tr td {
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--text2);
+}
+

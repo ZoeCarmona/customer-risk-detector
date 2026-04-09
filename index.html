@@ -8,11 +8,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
 
   <div id="splash" class="splash" role="main" aria-label="Pantalla de inicio Traxión">
-
     <div class="splash-bg">
       <div class="splash-grid"></div>
       <div class="road-glow"></div>
@@ -27,22 +28,13 @@
           <circle cx="96" cy="50" r="8" fill="#1a1a1a"/>
         </svg>
       </div>
-      <div class="truck truck-2">
-        <svg viewBox="0 0 120 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="10" y="22" width="75" height="26" rx="4" fill="#7a9200" opacity="0.7"/>
-          <rect x="67" y="16" width="20" height="32" rx="4" fill="#9fba00" opacity="0.8"/>
-          <circle cx="23" cy="50" r="7" fill="#1a1a1a"/>
-          <circle cx="74" cy="50" r="7" fill="#1a1a1a"/>
-          <circle cx="90" cy="50" r="7" fill="#1a1a1a"/>
-        </svg>
-      </div>
     </div>
 
     <div class="splash-overlay"></div>
 
     <div class="splash-content">
       <div class="splash-brand">
-        <div class="brand-logo-box" aria-hidden="true">
+        <div class="brand-logo-box">
           <svg width="52" height="52" viewBox="0 0 52 52" fill="none">
             <rect width="52" height="52" rx="12" fill="#c8e000"/>
             <path d="M10 36 L26 14 L42 36" stroke="white" stroke-width="4" stroke-linejoin="round" fill="none"/>
@@ -65,181 +57,145 @@
         Inteligencia predictiva para tu logística.
       </p>
 
-      <div class="splash-features">
-        <div class="splash-feat"><div class="feat-icon">⚡</div><span>Análisis en segundos</span></div>
-        <div class="splash-feat"><div class="feat-icon">🎯</div><span>Resultados claros</span></div>
-        <div class="splash-feat"><div class="feat-icon">🛡️</div><span>IA Predictiva</span></div>
-      </div>
-
-      <button class="splash-btn" id="btn-entrar" onclick="entrarAlSistema()" aria-label="Iniciar Sistema">
-        <span class="splash-btn-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
-        </span>
+      <button class="splash-btn" id="btn-entrar" onclick="entrarAlSistema()">
         <span>Iniciar Sistema</span>
       </button>
-
-      <p class="splash-hint">Toca para comenzar el análisis</p>
-    </div>
-
-    <div class="splash-footer">
-      <span>Hackatón Bécalos Traxión Tech 2026</span>
-      <span class="splash-footer-dot">·</span>
-      <span>Beta v1.0</span>
     </div>
   </div>
 
   <div id="app" class="app hidden" role="main">
-
+    
     <header class="hdr">
       <div class="hdr-inner">
-        <button class="hdr-back" onclick="volverInicio()">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
-            <path d="M19 12H5M12 19l-7-7 7-7"/>
-          </svg>
-          Inicio
-        </button>
-
+        <button class="hdr-back" onclick="volverInicio()">Atrás</button>
+        
         <div class="hdr-brand">
-          <div class="hdr-logo">
-            <svg width="28" height="28" viewBox="0 0 52 52" fill="none">
-              <rect width="52" height="52" rx="10" fill="#c8e000"/>
-              <path d="M10 36 L26 14 L42 36" stroke="white" stroke-width="4" stroke-linejoin="round" fill="none"/>
-            </svg>
-          </div>
-          <div>
-            <div class="hdr-title">Customer <strong>Risk Radar</strong></div>
-            <div class="hdr-sub">Traxión · Detección temprana de riesgo</div>
+          <div class="hdr-title">Radar de Riesgo</div>
+          <div class="hdr-location">
+            <span class="status-dot">●</span>
+            <span id="user-location">SALTILLO, COAHUILA</span>
           </div>
         </div>
 
-        <div class="hdr-badge">PROTOTIPO</div>
+        <div class="hdr-badge"></div>
       </div>
       <div class="hdr-rule"></div>
     </header>
 
     <main class="main-content">
-
-      <div class="guide-bar">
-        <div class="guide-step active" id="guide-1">
-          <div class="guide-num">1</div>
-          <span>Datos del cliente</span>
-        </div>
-        <div class="guide-arrow">›</div>
-        <div class="guide-step" id="guide-2">
-          <div class="guide-num">2</div>
-          <span>Presiona Evaluar</span>
-        </div>
-        <div class="guide-arrow">›</div>
-        <div class="guide-step" id="guide-3">
-          <div class="guide-num">3</div>
-          <span>Ver Diagnóstico</span>
-        </div>
+      
+      <div class="info-banner" style="margin-bottom: 20px; border-color: var(--green); background: rgba(200, 224, 0, 0.05);">
+          <div class="info-banner-icon" style="background: rgba(46, 204, 113, 0.1); color: var(--green);">
+              <span style="font-size: 20px;">🛡️</span>
+          </div>
+          <div>
+              <p style="margin: 0; font-weight: 800; color: var(--green); font-size: 14px; text-transform: uppercase;">Estado de Seguridad</p>
+              <p style="margin: 0; font-size: 13px; color: var(--text2);">
+                  Llevamos <strong id="dias-sin-incidentes" style="color: var(--green);">124</strong> días cuidando a nuestros clientes con éxito.
+              </p>
+          </div>
       </div>
 
       <section class="kpi-row">
         <div class="kpi">
-          <div class="kpi-icon">📊</div>
           <div class="kpi-val" id="kpi-total">0</div>
-          <div class="kpi-label">Evaluados</div>
+          <div class="kpi-label">Revisiones</div>
         </div>
         <div class="kpi kpi--red">
-          <div class="kpi-icon">🔴</div>
           <div class="kpi-val" id="kpi-rojo">0</div>
-          <div class="kpi-label">Riesgo Alto</div>
+          <div class="kpi-label">Atención Urgente</div>
         </div>
         <div class="kpi kpi--amber">
-          <div class="kpi-icon">🟡</div>
           <div class="kpi-val" id="kpi-amarillo">0</div>
-          <div class="kpi-label">Riesgo Medio</div>
+          <div class="kpi-label">Atención Media</div>
         </div>
         <div class="kpi kpi--green">
-          <div class="kpi-icon">🟢</div>
           <div class="kpi-val" id="kpi-verde">0</div>
-          <div class="kpi-label">Riesgo Bajo</div>
+          <div class="kpi-label">Clientes Felices</div>
         </div>
       </section>
 
       <div class="main-grid">
         <article class="card">
           <div class="card-header">
-            <div class="card-icon">📁</div>
-            <div>
-              <h2 class="card-title">Captura de Métricas</h2>
-              <p class="card-sub">Ingresa los valores del periodo actual</p>
-            </div>
+            <h2 class="card-title">Paso 1: Datos del Cliente</h2>
           </div>
-
-          <form id="risk-form" novalidate>
-            <div class="form-section">
-              <div class="field full">
-                <label class="field-label">Nombre del Cliente <span class="field-required">*</span></label>
-                <input type="text" id="cliente" class="field-input" placeholder="Nombre de la empresa" required />
-              </div>
+          <form id="risk-form">
+            <div class="field">
+              <label class="field-label">Nombre de la Empresa</label>
+              <input type="text" id="cliente" class="field-input" placeholder="Escriba el nombre aquí" required />
             </div>
-
-            <div class="form-section">
-              <div class="section-label">Operación y Servicio</div>
-              <div class="field-group">
-                <div class="field">
-                  <label class="field-label">Servicio Actual (%)</label>
-                  <div class="input-with-unit">
-                    <input type="number" id="servicio-actual" class="field-input" min="0" max="100" placeholder="0-100" required />
-                    <span class="input-unit">%</span>
-                  </div>
+            
+            <div class="field-group">
+              <div class="field">
+                <label class="field-label">Calidad de Servicio (%)</label>
+                <p style="font-size: 11px; color: #888; margin: -5px 0 5px 0;">¿Qué tan bien cumplimos hoy vs el mes pasado?</p>
+                <div style="display: flex; gap: 10px;">
+                    <input type="number" id="servicio-actual" class="field-input" placeholder="Hoy %" min="0" max="100" required />
+                    <input type="number" id="servicio-anterior" class="field-input" placeholder="Antes %" min="0" max="100" required />
                 </div>
-                <div class="field">
-                  <label class="field-label">Servicio Anterior (%)</label>
-                  <div class="input-with-unit">
-                    <input type="number" id="servicio-anterior" class="field-input" min="0" max="100" required />
-                    <span class="input-unit">%</span>
-                  </div>
+              </div>
+              
+              <div class="field">
+                <label class="field-label">Felicidad y Quejas</label>
+                <p style="font-size: 11px; color: #888; margin: -5px 0 5px 0;">Nivel de agrado (NPS) y número de reportes.</p>
+                <div style="display: flex; gap: 10px;">
+                    <input type="number" id="nps-actual" class="field-input" placeholder="Felicidad" required />
+                    <input type="number" id="quejas-actuales" class="field-input" placeholder="Quejas" required />
                 </div>
               </div>
             </div>
-
-            <div class="form-section">
-              <div class="section-label">Satisfacción y Quejas</div>
-              <div class="field-group">
-                <div class="field">
-                  <label class="field-label">NPS Actual</label>
-                  <div class="input-with-unit">
-                    <input type="number" id="nps-actual" class="field-input" min="-100" max="100" required />
-                    <span class="input-unit">pts</span>
-                  </div>
-                </div>
-                <div class="field">
-                  <label class="field-label">Quejas Abiertas</label>
-                  <input type="number" id="quejas-actuales" class="field-input" min="0" required />
-                </div>
-              </div>
-            </div>
-
-            <button type="submit" class="btn-eval" id="btn-eval">
-              Evaluar Riesgo Ahora
+            
+            <button type="submit" class="btn-eval" id="btn-eval" style="font-size: 16px; padding: 18px;">
+                🔍 ANALIZAR AHORA
             </button>
           </form>
         </article>
 
         <article class="card result-card">
           <div class="card-header">
-            <div class="card-icon">📡</div>
-            <div>
-              <h2 class="card-title">Diagnóstico Radar</h2>
-            </div>
+            <h2 class="card-title">Paso 2: Diagnóstico de la IA</h2>
           </div>
           <div id="resultado-area">
              <div class="empty-state">
-                <p>Esperando datos de evaluación...</p>
+                <p>Aquí aparecerán los resultados después de presionar el botón de analizar.</p>
              </div>
+          </div>
+          <div style="margin-top: 20px; height: 180px; position: relative;">
+            <canvas id="riskChart"></canvas>
           </div>
         </article>
       </div>
+
+      <section class="card history-section" style="margin-top: 20px;">
+        <div class="card-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+          <h2 class="card-title">Buscador de Registros Anteriores</h2>
+          
+          <div class="search-container" style="min-width: 300px;">
+            <input type="text" id="search-history" class="field-input" placeholder="🔎 Escriba nombre del cliente para buscar..." style="padding: 12px 16px; font-size: 14px;">
+          </div>
+        </div>
+
+        <div class="table-container" style="overflow-x: auto;">
+          <table class="history-table" style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+            <thead>
+              <tr style="text-align: left; color: var(--text4); font-size: 0.85rem; border-bottom: 2px solid rgba(255,255,255,0.1); text-transform: uppercase;">
+                <th style="padding: 15px;">Empresa</th>
+                <th style="padding: 15px;">Servicio</th>
+                <th style="padding: 15px;">Felicidad</th>
+                <th style="padding: 15px;">Resultado</th>
+              </tr>
+            </thead>
+            <tbody id="history-body">
+              </tbody>
+          </table>
+        </div>
+      </section>
+
     </main>
 
-    <footer class="ftr">
-      <p>Prototipo · <strong>Hackatón Bécalos Traxión Tech 2026</strong></p>
+    <footer class="ftr" style="text-align: center; padding: 30px; opacity: 0.7;">
+      <p>Bécalos Tech Challenge 2026 · <strong>Fundación Traxión </strong></p>
     </footer>
   </div>
 
