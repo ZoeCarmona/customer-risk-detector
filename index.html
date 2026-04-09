@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Customer Risk Radar - Traxión</title>
+    <title>Customer Risk Radar - Traxión Tech</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -12,123 +12,119 @@
     <div class="container">
         <header>
             <section class="hero">
-                <h1>Customer Risk Radar</h1>
-                <h2>Detección temprana de clientes en riesgo</h2>
-                <p>
-                    Prototipo conceptual para identificar señales tempranas de inconformidad en clientes 
-                    corporativos a partir de métricas operativas de <strong>Traxión</strong>.
-                </p>
+                <div class="hero-content">
+                    <h1>Customer Risk Radar</h1>
+                    <h2>Agente de IA para la retención de clientes</h2>
+                    <p>
+                        Identificación proactiva de señales tempranas de inconformidad 
+                        mediante el análisis de métricas operativas de <strong>Traxión</strong>.
+                    </p>
+                </div>
             </section>
         </header>
 
         <main>
             <section class="grid">
                 <article class="card">
-                    <h3>Captura de datos del cliente</h3>
+                    <div class="card-header">
+                        <h3>Captura de Datos</h3>
+                        <p>Simulación de métricas del periodo</p>
+                    </div>
+                    
                     <form id="risk-form">
                         <fieldset>
-                            <legend>Datos generales</legend>
+                            <legend>Identificación</legend>
+                            <div class="field full">
+                                <label for="cliente">Cliente Corporativo</label>
+                                <input type="text" id="cliente" placeholder="Nombre de la cuenta" required />
+                            </div>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend>Métricas de Servicio y Puntualidad</legend>
                             <div class="form-grid">
-                                <div class="field full">
-                                    <label for="cliente">Nombre del cliente corporativo</label>
-                                    <input type="text" id="cliente" placeholder="Nombre de la empresa" required />
+                                <div class="field">
+                                    <label>Nivel de Servicio (%)</label>
+                                    <input type="number" id="servicio-actual" min="0" max="100" placeholder="Actual" required />
+                                    <input type="number" id="servicio-anterior" min="0" max="100" placeholder="Anterior" required />
                                 </div>
                                 <div class="field">
-                                    <label for="periodo-actual">Periodo actual</label>
-                                    <input type="month" id="periodo-actual" value="2026-04" />
-                                </div>
-                                <div class="field">
-                                    <label for="periodo-anterior">Periodo anterior</label>
-                                    <input type="month" id="periodo-anterior" value="2026-03" />
+                                    <label>Puntualidad (%)</label>
+                                    <input type="number" id="puntualidad-actual" min="0" max="100" placeholder="Actual" required />
+                                    <input type="number" id="puntualidad-anterior" min="0" max="100" placeholder="Anterior" required />
                                 </div>
                             </div>
                         </fieldset>
 
                         <fieldset>
-                            <legend>Métricas operativas (%)</legend>
+                            <legend>Satisfacción y Quejas</legend>
                             <div class="form-grid">
                                 <div class="field">
-                                    <label for="servicio-actual">Nivel de servicio (Actual)</label>
-                                    <input type="number" id="servicio-actual" min="0" max="100" placeholder="0-100" required />
+                                    <label>NPS (Net Promoter Score)</label>
+                                    <input type="number" id="nps-actual" min="-100" max="100" placeholder="Actual" required />
+                                    <input type="number" id="nps-anterior" min="-100" max="100" placeholder="Anterior" required />
                                 </div>
                                 <div class="field">
-                                    <label for="servicio-anterior">Nivel de servicio (Anterior)</label>
-                                    <input type="number" id="servicio-anterior" min="0" max="100" required />
-                                </div>
-                                <div class="field">
-                                    <label for="puntualidad-actual">Puntualidad (Actual)</label>
-                                    <input type="number" id="puntualidad-actual" min="0" max="100" required />
-                                </div>
-                                <div class="field">
-                                    <label for="puntualidad-anterior">Puntualidad (Anterior)</label>
-                                    <input type="number" id="puntualidad-anterior" min="0" max="100" required />
+                                    <label>Quejas Abiertas</label>
+                                    <input type="number" id="quejas-actuales" min="0" placeholder="Actual" required />
+                                    <input type="number" id="quejas-anteriores" min="0" placeholder="Anterior" required />
                                 </div>
                             </div>
                         </fieldset>
 
-                        <fieldset>
-                            <legend>Experiencia del Cliente</legend>
-                            <div class="form-grid">
-                                <div class="field">
-                                    <label for="nps-actual">NPS Actual</label>
-                                    <input type="number" id="nps-actual" min="-100" max="100" required />
-                                </div>
-                                <div class="field">
-                                    <label for="nps-anterior">NPS Anterior</label>
-                                    <input type="number" id="nps-anterior" min="-100" max="100" required />
-                                </div>
-                                <div class="field">
-                                    <label for="quejas-actuales">Quejas abiertas (Actual)</label>
-                                    <input type="number" id="quejas-actuales" min="0" required />
-                                </div>
-                                <div class="field">
-                                    <label for="quejas-anteriores">Quejas abiertas (Anterior)</label>
-                                    <input type="number" id="quejas-anteriores" min="0" required />
-                                </div>
-                            </div>
-                        </fieldset>
-
-                        <button type="submit" class="btn">Evaluar Riesgo</button>
+                        <button type="submit" class="btn">Generar Diagnóstico de IA</button>
                     </form>
                 </article>
 
-                <article class="card resultado-container">
-                    <h3>Resultado del análisis</h3>
-                    
-                    <div class="risk-box" id="risk-box-status">
-                        <p class="risk-label">Semáforo de riesgo del cliente</p>
+                <article class="card result-card">
+                    <div class="card-header">
+                        <h3>Semáforo de Riesgo</h3>
+                        <p>Resultado del análisis de tendencias</p>
+                    </div>
+
+                    <div class="risk-box" id="risk-visual">
                         <div class="risk-status">
                             <span class="dot" id="status-dot"></span>
-                            <span id="status-text">ESPERANDO DATOS</span>
+                            <span id="status-text">ESPERANDO ANÁLISIS</span>
                         </div>
                     </div>
 
-                    <div class="info-block">
-                        <h4>Diagnóstico del Agente IA</h4>
-                        <p id="diagnostico-texto">
-                            Ingresa las métricas para generar un diagnóstico basado en tendencias negativas y niveles de servicio.
-                        </p>
-                    </div>
+                    <div class="analysis-content">
+                        <div class="info-block">
+                            <h4><span class="icon">📊</span> Diagnóstico Detallado</h4>
+                            <p id="diagnostico-texto">
+                                Ingrese las métricas para que el Agente de IA detecte tendencias negativas.
+                            </p>
+                        </div>
 
-                    <div class="info-block">
-                        <h4>Acciones preventivas sugeridas</h4>
-                        <ul id="acciones-lista">
-                            <li>Las recomendaciones aparecerán tras la evaluación.</li>
-                        </ul>
+                        <div class="info-block">
+                            <h4><span class="icon">🚀</span> Acciones de Prevención</h4>
+                            <ul id="acciones-lista" class="action-list">
+                                <li>Las recomendaciones se generarán automáticamente.</li>
+                            </ul>
+                        </div>
                     </div>
                 </article>
             </section>
 
             <section class="card logic-card">
-                <h3>¿Cómo evalúa el sistema al cliente?</h3>
-                <p>
-                    El sistema integra múltiples métricas en una sola lectura. Prioriza clientes para atención proactiva convirtiendo datos operativos en acciones claras.
-                </p>
+                <div class="logic-grid">
+                    <div class="logic-text">
+                        <h3>¿Cómo clasifica la IA el riesgo?</h3>
+                        <p>
+                            El modelo integra métricas de experiencia y operación para reducir el <strong>churn reactivo</strong>. 
+                            Compara el desempeño histórico para alertar sobre deterioros antes de que ocurra una cancelación.
+                        </p>
+                    </div>
+                </div>
             </section>
         </main>
 
         <footer>
-            <p>Prototipo web conceptual desarrollado para el <strong>Hackatón Bécalos Traxión Tech 2026</strong>.</p>
+            <div class="footer-content">
+                <p>Prototipo desarrollado para el <strong>Hackatón Bécalos Traxión Tech 2026</strong></p>
+                <p class="team-note">Eje 2: Detección temprana de clientes en riesgo</p>
+            </div>
         </footer>
     </div>
     <script src="script.js"></script>
