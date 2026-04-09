@@ -1,152 +1,219 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Customer Risk Radar</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Customer Risk Radar · Traxión</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </head>
 <body>
-    <div class="container">
-        <header>
-        <section class="hero">
-            <h1>Customer Risk Radar</h1>
-            <h2>Detección temprana de clientes en riesgo</h2>
-            <p>
-            Prototipo conceptual para identificar señales tempranas de inconformidad en clientes
-            corporativos a partir de métricas operativas como nivel de servicio, puntualidad,
-            NPS y quejas abiertas.
-            </p>
-        </section>
-        </header>
 
-        <main>
-            <section class="grid">
-                <article class="card">
-                <h3>Captura de datos del cliente</h3>
-
-                <p class="section-title">Datos generales</p>
-                <div class="form-grid">
-                    <div class="field full">
-                    <label for="cliente">Nombre del cliente</label>
-                    <input type="text" id="cliente" value="Cliente Alfa" />
-                    </div>
-
-                    <div class="field">
-                    <label for="periodo-actual">Periodo actual</label>
-                    <input type="text" id="periodo-actual" value="Abril 2026" />
-                    </div>
-
-                    <div class="field">
-                    <label for="periodo-anterior">Periodo anterior</label>
-                    <input type="text" id="periodo-anterior" value="Marzo 2026" />
-                    </div>
-                </div>
-
-                <p class="section-title">Métricas operativas</p>
-                <div class="form-grid">
-                    <div class="field">
-                    <label for="servicio-actual">Nivel de servicio actual (%)</label>
-                    <input type="text" id="servicio-actual" value="84" />
-                    </div>
-
-                    <div class="field">
-                    <label for="servicio-anterior">Nivel de servicio anterior (%)</label>
-                    <input type="text" id="servicio-anterior" value="92" />
-                    </div>
-
-                    <div class="field">
-                    <label for="puntualidad-actual">Puntualidad actual (%)</label>
-                    <input type="text" id="puntualidad-actual" value="81" />
-                    </div>
-
-                    <div class="field">
-                    <label for="puntualidad-anterior">Puntualidad anterior (%)</label>
-                    <input type="text" id="puntualidad-anterior" value="93" />
-                    </div>
-
-                    <div class="field">
-                    <label for="nps-actual">NPS actual</label>
-                    <input type="text" id="nps-actual" value="10" />
-                    </div>
-
-                    <div class="field">
-                    <label for="nps-anterior">NPS anterior</label>
-                    <input type="text" id="nps-anterior" value="35" />
-                    </div>
-
-                    <div class="field">
-                    <label for="quejas-actuales">Quejas abiertas actuales</label>
-                    <input type="text" id="quejas-actuales" value="6" />
-                    </div>
-
-                    <div class="field">
-                    <label for="quejas-anteriores">Quejas abiertas anteriores</label>
-                    <input type="text" id="quejas-anteriores" value="1" />
-                    </div>
-                </div>
-
-                <button class="btn">Evaluar cliente</button>
-                </article>
-
-                <article class="card">
-                <h3>Resultado del análisis</h3>
-
-                <div class="risk-box">
-                    <p class="risk-label">Semáforo de riesgo del cliente</p>
-                    <div class="risk-status">
-                    <span class="dot"></span>
-                    <span>ALTO</span>
-                    </div>
-                </div>
-
-                <div class="info-block">
-                    <h4>Diagnóstico</h4>
-                    <p>
-                    El cliente presenta un nivel de riesgo alto debido a una disminución en la
-                    puntualidad, una caída en el NPS, una reducción en el nivel de servicio y un
-                    aumento considerable en las quejas abiertas. Estas señales indican deterioro
-                    simultáneo en la experiencia y operación del servicio.
-                    </p>
-                </div>
-
-                <div class="info-block">
-                    <h4>Métricas detectadas</h4>
-                    <ul>
-                    <li><strong>Nivel de servicio:</strong> 92% → 84%</li>
-                    <li><strong>Puntualidad:</strong> 93% → 81%</li>
-                    <li><strong>NPS:</strong> 35 → 10</li>
-                    <li><strong>Quejas abiertas:</strong> 1 → 6</li>
-                    </ul>
-                </div>
-
-                <div class="info-block">
-                    <h4>Acciones recomendadas</h4>
-                    <ul>
-                    <li>Contactar de inmediato al cliente.</li>
-                    <li>Revisar causas operativas del deterioro.</li>
-                    <li>Definir un plan correctivo con fechas.</li>
-                    <li>Dar seguimiento prioritario a la cuenta.</li>
-                    </ul>
-                </div>
-                </article>
-            </section>
-
-            <section class="card logic-card">
-                <h3>¿Cómo evalúa el sistema al cliente?</h3>
-                <p>
-                El sistema compara las métricas del periodo actual contra las del periodo anterior.
-                Si detecta deterioros en puntualidad, nivel de servicio, NPS o quejas abiertas,
-                clasifica el riesgo del cliente como bajo, medio o alto y propone acciones preventivas
-                para una atención más oportuna.
-                </p>
-            </section>
-        </main>
-
-        <footer>
-        <p>Prototipo web conceptual desarrollado para el Hackatón Bécalos Traxión Tech 2026.</p>
-        </footer>
+  <div id="splash" class="splash" role="main" aria-label="Pantalla de inicio Traxión">
+    <div class="splash-bg">
+      <div class="splash-grid"></div>
+      <div class="road-glow"></div>
+      <div class="road-strip"></div>
+      <div class="truck truck-1">
+        <svg viewBox="0 0 120 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="10" y="20" width="80" height="28" rx="4" fill="#9fba00" opacity="0.9"/>
+          <rect x="72" y="14" width="22" height="34" rx="4" fill="#c8e000"/>
+          <circle cx="25" cy="50" r="8" fill="#1a1a1a"/>
+          <circle cx="78" cy="50" r="8" fill="#1a1a1a"/>
+          <circle cx="96" cy="50" r="8" fill="#1a1a1a"/>
+        </svg>
+      </div>
     </div>
+
+    <div class="splash-overlay"></div>
+    
+    <div class="splash-content">
+      <div class="splash-brand">
+        <div class="brand-logo-box">
+          <img src="img/logo.png" alt="Logo Traxión" style="width: 100%; height: 100%; object-fit: contain;">
+        </div>
+        <div class="brand-text">
+          <span class="brand-name">Traxión</span>
+          <span class="brand-division">Fundación · Bécalos Tech 2026</span>
+        </div>
+      </div>
+
+      <h1 class="splash-title">
+        <span class="splash-title-main">Customer</span>
+        <span class="splash-title-accent">Risk Radar</span>
+      </h1>
+      <p class="splash-desc">Eje 2: Detección temprana de clientes en riesgo.<br>Análisis proactivo de métricas operativas.</p>
+      
+      <button class="splash-btn" id="btn-entrar" onclick="entrarAlSistema()">
+        <span>Iniciar Agente de Riesgo</span>
+      </button>
+    </div>
+  </div>
+
+  <div id="app" class="app hidden" role="main">
+    <header class="hdr">
+      <div class="hdr-inner">
+        <button class="hdr-back" onclick="volverInicio()">Atrás</button>
+        <div class="hdr-brand" style="display: flex; align-items: center; gap: 12px;">
+          <img src="img/logo.png" alt="Logo" style="height: 35px; width: auto;">
+          <div>
+            <div class="hdr-title"><strong>TRAXIÓN</strong> Risk Detector</div>
+            <div class="hdr-sub">Agente de Salud del Cliente</div>
+          </div>
+        </div>
+        <div class="hdr-badge">Becalos Tech Challenge</div>
+      </div>
+      <div class="hdr-rule"></div>
+    </header>
+
+    <main class="main-content">
+      <div class="accessibility-control" style="display: flex; align-items: center; gap: 12px; background: rgba(200, 224, 0, 0.1); padding: 12px 18px; border-radius: 10px; margin-bottom: 20px; border: 1px solid #c8e000;">
+        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; color: #f4f4f4; font-weight: 600; font-size: 13px;">
+          <span id="voice-icon">🔇</span> Interacción por Voz (Guía Conversacional)
+          <input type="checkbox" id="voice-toggle" style="margin-left: 10px;">
+        </label>
+      </div>
+
+      <div class="main-grid">
+        <article class="card">
+          <div class="card-header">
+            <div class="card-icon">01</div>
+            <div>
+              <h2 class="card-title">Captura de Métricas</h2>
+              <p class="card-sub">Eje 2: Comparativa de salud operativa</p>
+            </div>
+          </div>
+
+          <form id="risk-form">
+            <div class="form-section">
+              <span class="section-label"><span class="section-num">1.1</span> Identificación</span>
+              <div class="field">
+                <label class="field-label">Nombre del Cliente Corporativo</label>
+                <input type="text" id="cliente" class="field-input" placeholder="Ej. Walmart, Soriana..." required />
+              </div>
+              <div class="field-group" style="margin-top:10px;">
+                <div class="field">
+                  <label class="field-label">Periodo Actual</label>
+                  <input type="text" id="periodo-actual" class="field-input" placeholder="Ej. Abril 2026" required />
+                </div>
+                <div class="field">
+                  <label class="field-label">Periodo Anterior</label>
+                  <input type="text" id="periodo-anterior" class="field-input" placeholder="Ej. Marzo 2026" required />
+                </div>
+              </div>
+            </div>
+
+            <div class="form-section">
+              <span class="section-label"><span class="section-num">1.2</span> Análisis Comparativo (%)</span>
+              
+              <div class="field-group">
+                <div class="field">
+                  <label class="field-label">Nivel de Servicio</label>
+                  <div class="input-with-unit">
+                    <input type="number" id="servicio-actual" class="field-input" placeholder="Act %" required />
+                    <input type="number" id="servicio-anterior" class="field-input" placeholder="Ant %" required />
+                  </div>
+                </div>
+                <div class="field">
+                  <label class="field-label">Puntualidad</label>
+                  <div class="input-with-unit">
+                    <input type="number" id="puntualidad-actual" class="field-input" placeholder="Act %" required />
+                    <input type="number" id="puntualidad-anterior" class="field-input" placeholder="Ant %" required />
+                  </div>
+                </div>
+              </div>
+
+              <div class="field-group" style="margin-top:10px;">
+                <div class="field">
+                  <label class="field-label">NPS (Satisfacción)</label>
+                  <div class="input-with-unit">
+                    <input type="number" id="nps-actual" class="field-input" placeholder="Act" required />
+                    <input type="number" id="nps-anterior" class="field-input" placeholder="Ant" required />
+                  </div>
+                </div>
+                <div class="field">
+                  <label class="field-label">Quejas Abiertas</label>
+                  <div class="input-with-unit">
+                    <input type="number" id="quejas-actuales" class="field-input" placeholder="Act" required />
+                    <input type="number" id="quejas-anteriores" class="field-input" placeholder="Ant" required />
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <button type="submit" class="btn-eval" id="btn-eval">
+                PROCESAR INFORMACIÓN Y EVALUAR
+            </button>
+          </form>
+        </article>
+
+        <article class="card result-card">
+          <div class="card-header">
+            <div class="card-icon">02</div>
+            <div>
+              <h2 class="card-title">Diagnóstico IA</h2>
+              <p class="card-sub">Estado actual y acciones sugeridas</p>
+            </div>
+          </div>
+          
+          <div id="resultado-area">
+             <div class="empty-state">
+                <p>Esperando datos para análisis...</p>
+             </div>
+          </div>
+
+          <div class="chart-container" style="margin-top: 20px; height: 180px; position: relative;">
+            <canvas id="riskChart"></canvas>
+            <div class="chart-center-label">
+                <span id="kpi-total">0</span>
+                <small>TOTAL</small>
+            </div>
+          </div>
+
+          <div class="mini-kpis" style="display: flex; justify-content: space-around; margin-top: 15px; text-align: center;">
+            <div style="color: #2ecc71;"><strong>V:</strong> <span id="kpi-verde">0</span></div>
+            <div style="color: #f5a623;"><strong>A:</strong> <span id="kpi-amarillo">0</span></div>
+            <div style="color: #e8453c;"><strong>R:</strong> <span id="kpi-rojo">0</span></div>
+          </div>
+        </article>
+      </div>
+
+      <section class="card history-section" style="margin-top: 20px;">
+        <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+          <h2 class="card-title">Historial de Riesgo</h2>
+          <div class="excel-actions">
+            <label for="excel-file" class="btn-excel-label">📂 Carga Masiva Excel</label>
+            <input type="file" id="excel-file" accept=".xlsx, .xls" hidden />
+          </div>
+        </div>
+
+        <div class="table-container">
+          <table class="history-table" style="width: 100%;">
+            <thead>
+              <tr>
+                <th>Cliente</th>
+                <th>Periodos</th>
+                <th>Riesgo</th>
+                <th>Acción</th>
+              </tr>
+            </thead>
+            <tbody id="history-body"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <footer class="ftr">
+      <p>Fundación Traxión · Hackatón Bécalos Tech 2026 · <strong>Equipo UTC</strong></p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
