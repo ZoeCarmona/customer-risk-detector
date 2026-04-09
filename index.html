@@ -1,132 +1,248 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Customer Risk Radar - Traxión Tech</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Customer Risk Radar · Traxión</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <div class="container">
-        <header>
-            <section class="hero">
-                <div class="hero-content">
-                    <h1>Customer Risk Radar</h1>
-                    <h2>Agente de IA para la retención de clientes</h2>
-                    <p>
-                        Identificación proactiva de señales tempranas de inconformidad 
-                        mediante el análisis de métricas operativas de <strong>Traxión</strong>.
-                    </p>
-                </div>
-            </section>
-        </header>
 
-        <main>
-            <section class="grid">
-                <article class="card">
-                    <div class="card-header">
-                        <h3>Captura de Datos</h3>
-                        <p>Simulación de métricas del periodo</p>
-                    </div>
-                    
-                    <form id="risk-form">
-                        <fieldset>
-                            <legend>Identificación</legend>
-                            <div class="field full">
-                                <label for="cliente">Cliente Corporativo</label>
-                                <input type="text" id="cliente" placeholder="Nombre de la cuenta" required />
-                            </div>
-                        </fieldset>
+  <div id="splash" class="splash" role="main" aria-label="Pantalla de inicio Traxión">
 
-                        <fieldset>
-                            <legend>Métricas de Servicio y Puntualidad</legend>
-                            <div class="form-grid">
-                                <div class="field">
-                                    <label>Nivel de Servicio (%)</label>
-                                    <input type="number" id="servicio-actual" min="0" max="100" placeholder="Actual" required />
-                                    <input type="number" id="servicio-anterior" min="0" max="100" placeholder="Anterior" required />
-                                </div>
-                                <div class="field">
-                                    <label>Puntualidad (%)</label>
-                                    <input type="number" id="puntualidad-actual" min="0" max="100" placeholder="Actual" required />
-                                    <input type="number" id="puntualidad-anterior" min="0" max="100" placeholder="Anterior" required />
-                                </div>
-                            </div>
-                        </fieldset>
-
-                        <fieldset>
-                            <legend>Satisfacción y Quejas</legend>
-                            <div class="form-grid">
-                                <div class="field">
-                                    <label>NPS (Net Promoter Score)</label>
-                                    <input type="number" id="nps-actual" min="-100" max="100" placeholder="Actual" required />
-                                    <input type="number" id="nps-anterior" min="-100" max="100" placeholder="Anterior" required />
-                                </div>
-                                <div class="field">
-                                    <label>Quejas Abiertas</label>
-                                    <input type="number" id="quejas-actuales" min="0" placeholder="Actual" required />
-                                    <input type="number" id="quejas-anteriores" min="0" placeholder="Anterior" required />
-                                </div>
-                            </div>
-                        </fieldset>
-
-                        <button type="submit" class="btn">Generar Diagnóstico de IA</button>
-                    </form>
-                </article>
-
-                <article class="card result-card">
-                    <div class="card-header">
-                        <h3>Semáforo de Riesgo</h3>
-                        <p>Resultado del análisis de tendencias</p>
-                    </div>
-
-                    <div class="risk-box" id="risk-visual">
-                        <div class="risk-status">
-                            <span class="dot" id="status-dot"></span>
-                            <span id="status-text">ESPERANDO ANÁLISIS</span>
-                        </div>
-                    </div>
-
-                    <div class="analysis-content">
-                        <div class="info-block">
-                            <h4><span class="icon">📊</span> Diagnóstico Detallado</h4>
-                            <p id="diagnostico-texto">
-                                Ingrese las métricas para que el Agente de IA detecte tendencias negativas.
-                            </p>
-                        </div>
-
-                        <div class="info-block">
-                            <h4><span class="icon">🚀</span> Acciones de Prevención</h4>
-                            <ul id="acciones-lista" class="action-list">
-                                <li>Las recomendaciones se generarán automáticamente.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </article>
-            </section>
-
-            <section class="card logic-card">
-                <div class="logic-grid">
-                    <div class="logic-text">
-                        <h3>¿Cómo clasifica la IA el riesgo?</h3>
-                        <p>
-                            El modelo integra métricas de experiencia y operación para reducir el <strong>churn reactivo</strong>. 
-                            Compara el desempeño histórico para alertar sobre deterioros antes de que ocurra una cancelación.
-                        </p>
-                    </div>
-                </div>
-            </section>
-        </main>
-
-        <footer>
-            <div class="footer-content">
-                <p>Prototipo desarrollado para el <strong>Hackatón Bécalos Traxión Tech 2026</strong></p>
-                <p class="team-note">Eje 2: Detección temprana de clientes en riesgo</p>
-            </div>
-        </footer>
+    <div class="splash-bg">
+      <div class="splash-grid"></div>
+      <div class="road-glow"></div>
+      <div class="road-strip"></div>
+      
+      <div class="truck truck-1">
+        <svg viewBox="0 0 120 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="10" y="20" width="80" height="28" rx="4" fill="#9fba00" opacity="0.9"/>
+          <rect x="72" y="14" width="22" height="34" rx="4" fill="#c8e000"/>
+          <circle cx="25" cy="50" r="8" fill="#1a1a1a"/>
+          <circle cx="78" cy="50" r="8" fill="#1a1a1a"/>
+          <circle cx="96" cy="50" r="8" fill="#1a1a1a"/>
+        </svg>
+      </div>
+      <div class="truck truck-2">
+        <svg viewBox="0 0 120 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="10" y="22" width="75" height="26" rx="4" fill="#7a9200" opacity="0.7"/>
+          <rect x="67" y="16" width="20" height="32" rx="4" fill="#9fba00" opacity="0.8"/>
+          <circle cx="23" cy="50" r="7" fill="#1a1a1a"/>
+          <circle cx="74" cy="50" r="7" fill="#1a1a1a"/>
+          <circle cx="90" cy="50" r="7" fill="#1a1a1a"/>
+        </svg>
+      </div>
     </div>
-    <script src="script.js"></script>
+
+    <div class="splash-overlay"></div>
+
+    <div class="splash-content">
+      <div class="splash-brand">
+        <div class="brand-logo-box" aria-hidden="true">
+          <svg width="52" height="52" viewBox="0 0 52 52" fill="none">
+            <rect width="52" height="52" rx="12" fill="#c8e000"/>
+            <path d="M10 36 L26 14 L42 36" stroke="white" stroke-width="4" stroke-linejoin="round" fill="none"/>
+            <path d="M18 36 L26 22 L34 36" fill="white" opacity="0.6"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-name">Traxión</span>
+          <span class="brand-division">Fundación · Bécalos Tech 2026</span>
+        </div>
+      </div>
+
+      <h1 class="splash-title">
+        <span class="splash-title-main">Customer</span>
+        <span class="splash-title-accent">Risk Radar</span>
+      </h1>
+
+      <p class="splash-desc">
+        Detecta clientes en riesgo antes de que sea tarde.<br>
+        Inteligencia predictiva para tu logística.
+      </p>
+
+      <div class="splash-features">
+        <div class="splash-feat"><div class="feat-icon">⚡</div><span>Análisis en segundos</span></div>
+        <div class="splash-feat"><div class="feat-icon">🎯</div><span>Resultados claros</span></div>
+        <div class="splash-feat"><div class="feat-icon">🛡️</div><span>IA Predictiva</span></div>
+      </div>
+
+      <button class="splash-btn" id="btn-entrar" onclick="entrarAlSistema()" aria-label="Iniciar Sistema">
+        <span class="splash-btn-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </span>
+        <span>Iniciar Sistema</span>
+      </button>
+
+      <p class="splash-hint">Toca para comenzar el análisis</p>
+    </div>
+
+    <div class="splash-footer">
+      <span>Hackatón Bécalos Traxión Tech 2026</span>
+      <span class="splash-footer-dot">·</span>
+      <span>Beta v1.0</span>
+    </div>
+  </div>
+
+  <div id="app" class="app hidden" role="main">
+
+    <header class="hdr">
+      <div class="hdr-inner">
+        <button class="hdr-back" onclick="volverInicio()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+          </svg>
+          Inicio
+        </button>
+
+        <div class="hdr-brand">
+          <div class="hdr-logo">
+            <svg width="28" height="28" viewBox="0 0 52 52" fill="none">
+              <rect width="52" height="52" rx="10" fill="#c8e000"/>
+              <path d="M10 36 L26 14 L42 36" stroke="white" stroke-width="4" stroke-linejoin="round" fill="none"/>
+            </svg>
+          </div>
+          <div>
+            <div class="hdr-title">Customer <strong>Risk Radar</strong></div>
+            <div class="hdr-sub">Traxión · Detección temprana de riesgo</div>
+          </div>
+        </div>
+
+        <div class="hdr-badge">PROTOTIPO</div>
+      </div>
+      <div class="hdr-rule"></div>
+    </header>
+
+    <main class="main-content">
+
+      <div class="guide-bar">
+        <div class="guide-step active" id="guide-1">
+          <div class="guide-num">1</div>
+          <span>Datos del cliente</span>
+        </div>
+        <div class="guide-arrow">›</div>
+        <div class="guide-step" id="guide-2">
+          <div class="guide-num">2</div>
+          <span>Presiona Evaluar</span>
+        </div>
+        <div class="guide-arrow">›</div>
+        <div class="guide-step" id="guide-3">
+          <div class="guide-num">3</div>
+          <span>Ver Diagnóstico</span>
+        </div>
+      </div>
+
+      <section class="kpi-row">
+        <div class="kpi">
+          <div class="kpi-icon">📊</div>
+          <div class="kpi-val" id="kpi-total">0</div>
+          <div class="kpi-label">Evaluados</div>
+        </div>
+        <div class="kpi kpi--red">
+          <div class="kpi-icon">🔴</div>
+          <div class="kpi-val" id="kpi-rojo">0</div>
+          <div class="kpi-label">Riesgo Alto</div>
+        </div>
+        <div class="kpi kpi--amber">
+          <div class="kpi-icon">🟡</div>
+          <div class="kpi-val" id="kpi-amarillo">0</div>
+          <div class="kpi-label">Riesgo Medio</div>
+        </div>
+        <div class="kpi kpi--green">
+          <div class="kpi-icon">🟢</div>
+          <div class="kpi-val" id="kpi-verde">0</div>
+          <div class="kpi-label">Riesgo Bajo</div>
+        </div>
+      </section>
+
+      <div class="main-grid">
+        <article class="card">
+          <div class="card-header">
+            <div class="card-icon">📁</div>
+            <div>
+              <h2 class="card-title">Captura de Métricas</h2>
+              <p class="card-sub">Ingresa los valores del periodo actual</p>
+            </div>
+          </div>
+
+          <form id="risk-form" novalidate>
+            <div class="form-section">
+              <div class="field full">
+                <label class="field-label">Nombre del Cliente <span class="field-required">*</span></label>
+                <input type="text" id="cliente" class="field-input" placeholder="Nombre de la empresa" required />
+              </div>
+            </div>
+
+            <div class="form-section">
+              <div class="section-label">Operación y Servicio</div>
+              <div class="field-group">
+                <div class="field">
+                  <label class="field-label">Servicio Actual (%)</label>
+                  <div class="input-with-unit">
+                    <input type="number" id="servicio-actual" class="field-input" min="0" max="100" placeholder="0-100" required />
+                    <span class="input-unit">%</span>
+                  </div>
+                </div>
+                <div class="field">
+                  <label class="field-label">Servicio Anterior (%)</label>
+                  <div class="input-with-unit">
+                    <input type="number" id="servicio-anterior" class="field-input" min="0" max="100" required />
+                    <span class="input-unit">%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-section">
+              <div class="section-label">Satisfacción y Quejas</div>
+              <div class="field-group">
+                <div class="field">
+                  <label class="field-label">NPS Actual</label>
+                  <div class="input-with-unit">
+                    <input type="number" id="nps-actual" class="field-input" min="-100" max="100" required />
+                    <span class="input-unit">pts</span>
+                  </div>
+                </div>
+                <div class="field">
+                  <label class="field-label">Quejas Abiertas</label>
+                  <input type="number" id="quejas-actuales" class="field-input" min="0" required />
+                </div>
+              </div>
+            </div>
+
+            <button type="submit" class="btn-eval" id="btn-eval">
+              Evaluar Riesgo Ahora
+            </button>
+          </form>
+        </article>
+
+        <article class="card result-card">
+          <div class="card-header">
+            <div class="card-icon">📡</div>
+            <div>
+              <h2 class="card-title">Diagnóstico Radar</h2>
+            </div>
+          </div>
+          <div id="resultado-area">
+             <div class="empty-state">
+                <p>Esperando datos de evaluación...</p>
+             </div>
+          </div>
+        </article>
+      </div>
+    </main>
+
+    <footer class="ftr">
+      <p>Prototipo · <strong>Hackatón Bécalos Traxión Tech 2026</strong></p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
