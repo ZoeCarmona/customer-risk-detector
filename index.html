@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Customer Risk Radar · Traxión</title>
+  
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
@@ -15,13 +16,13 @@
 </head>
 <body>
 
-  <div id="splash" class="splash" role="main" aria-label="Pantalla de inicio Traxión">
+  <div id="splash" class="splash" role="region" aria-label="Pantalla de bienvenida">
     <div class="splash-bg">
       <div class="splash-grid"></div>
       <div class="road-glow"></div>
       <div class="road-strip"></div>
       <div class="truck truck-1">
-        <svg viewBox="0 0 120 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg viewBox="0 0 120 60" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <rect x="10" y="20" width="80" height="28" rx="4" fill="#9fba00" opacity="0.9"/>
           <rect x="72" y="14" width="22" height="34" rx="4" fill="#c8e000"/>
           <circle cx="25" cy="50" r="8" fill="#1a1a1a"/>
@@ -36,7 +37,7 @@
     <div class="splash-content">
       <div class="splash-brand">
         <div class="brand-logo-box">
-          <img src="img/logo.png" alt="Logo Traxión" style="width: 100%; height: 100%; object-fit: contain;">
+          <img src="img/logo.png" alt="Logotipo de Traxión">
         </div>
         <div class="brand-text">
           <span class="brand-name">Traxión</span>
@@ -50,167 +51,151 @@
       </h1>
       <p class="splash-desc">Eje 2: Detección temprana de clientes en riesgo.<br>Análisis proactivo de métricas operativas.</p>
       
-      <button class="splash-btn" id="btn-entrar" onclick="entrarAlSistema()">
+      <div style="margin-bottom: 20px;">
+        <label style="color: white; font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;">
+          <input type="checkbox" id="voice-toggle">
+          <span>Activar guía de voz interactiva</span>
+        </label>
+      </div>
+
+      <button class="splash-btn" id="btn-entrar" onclick="entrarAlSistema()" aria-label="Iniciar Agente de Riesgo">
         <span>Iniciar Agente de Riesgo</span>
       </button>
     </div>
   </div>
 
-  <div id="app" class="app hidden" role="main">
+  <div id="app" class="app hidden" role="main" aria-hidden="true">
     <header class="hdr">
       <div class="hdr-inner">
-        <button class="hdr-back" onclick="volverInicio()">Atrás</button>
-        <div class="hdr-brand" style="display: flex; align-items: center; gap: 12px;">
-          <img src="img/logo.png" alt="Logo" style="height: 35px; width: auto;">
+        <button class="hdr-back" onclick="volverInicio()" aria-label="Volver al menú de inicio">Atrás</button>
+        <div class="hdr-brand">
+          <img src="img/logo.png" alt="Traxión Logo" style="height: 35px;">
           <div>
             <div class="hdr-title"><strong>TRAXIÓN</strong> Risk Detector</div>
-            <div class="hdr-sub">Agente de Salud del Cliente</div>
+            <div class="hdr-sub">Salud del Cliente</div>
           </div>
         </div>
-        <div class="hdr-badge">Becalos Tech Challenge</div>
+        <div class="hdr-badge" role="status">Bécalos Tech 2026</div>
       </div>
       <div class="hdr-rule"></div>
     </header>
 
     <main class="main-content">
-      <div class="accessibility-control" style="display: flex; align-items: center; gap: 12px; background: rgba(200, 224, 0, 0.1); padding: 12px 18px; border-radius: 10px; margin-bottom: 20px; border: 1px solid #c8e000;">
-        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; color: #f4f4f4; font-weight: 600; font-size: 13px;">
-          <span id="voice-icon">🔇</span> Interacción por Voz (Guía Conversacional)
-          <input type="checkbox" id="voice-toggle" style="margin-left: 10px;">
-        </label>
-      </div>
-
       <div class="main-grid">
-        <article class="card">
-          <div class="card-header">
-            <div class="card-icon">01</div>
-            <div>
-              <h2 class="card-title">Captura de Métricas</h2>
-              <p class="card-sub">Eje 2: Comparativa de salud operativa</p>
+        <article class="card" role="section">
+          <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; gap: 15px; align-items: center;">
+                <div class="card-icon" aria-hidden="true">01</div>
+                <h2 class="card-title" style="margin:0;">Métricas</h2>
+            </div>
+            
+            <div id="loc-badge" onclick="obtenerUbicacion()" role="button" aria-label="Actualizar ubicación" 
+                 style="cursor: pointer; background: rgba(200, 224, 0, 0.1); padding: 6px 14px; border-radius: 20px; border: 1px solid #c8e000; color: #c8e000; font-weight: bold; font-size: 11px;">
+                📍 <span id="txt-ubicacion">Saltillo, Coahuila</span>
             </div>
           </div>
 
-          <form id="risk-form">
+          <form id="risk-form" style="margin-top: 20px;">
             <div class="form-section">
-              <span class="section-label"><span class="section-num">1.1</span> Identificación</span>
-              <div class="field">
-                <label class="field-label">Nombre del Cliente Corporativo</label>
-                <input type="text" id="cliente" class="field-input" placeholder="Ej. Walmart, Soriana..." required />
-              </div>
-              <div class="field-group" style="margin-top:10px;">
+              <label for="cliente" class="field-label">Cliente Corporativo</label>
+              <input type="text" id="cliente" class="field-input" placeholder="Nombre de la empresa" required>
+              
+              <div class="field-group" style="margin-top: 15px;">
                 <div class="field">
-                  <label class="field-label">Periodo Actual</label>
-                  <input type="text" id="periodo-actual" class="field-input" placeholder="Ej. Abril 2026" required />
+                  <label for="periodo-actual" class="field-label">Periodo Actual</label>
+                  <input type="text" id="periodo-actual" class="field-input" placeholder="Ej. Abril 2026" required>
                 </div>
                 <div class="field">
-                  <label class="field-label">Periodo Anterior</label>
-                  <input type="text" id="periodo-anterior" class="field-input" placeholder="Ej. Marzo 2026" required />
+                  <label for="servicio-anterior-input" class="field-label">Periodo Anterior</label>
+                  <input type="text" id="periodo-anterior" class="field-input" placeholder="Ej. Marzo 2026" required>
                 </div>
               </div>
             </div>
 
             <div class="form-section">
-              <span class="section-label"><span class="section-num">1.2</span> Análisis Comparativo (%)</span>
-              
+              <span class="section-label" style="display:block; margin-bottom:10px; color:#888; font-size:12px; font-weight:bold;">Métricas de Servicio (%)</span>
               <div class="field-group">
                 <div class="field">
-                  <label class="field-label">Nivel de Servicio</label>
-                  <div class="input-with-unit">
-                    <input type="number" id="servicio-actual" class="field-input" placeholder="Act %" required />
-                    <input type="number" id="servicio-anterior" class="field-input" placeholder="Ant %" required />
-                  </div>
+                  <label for="servicio-actual" class="field-label">Servicio Actual (%)</label>
+                  <input type="number" id="servicio-actual" class="field-input" placeholder="0-100" min="0" max="100" required>
                 </div>
                 <div class="field">
-                  <label class="field-label">Puntualidad</label>
-                  <div class="input-with-unit">
-                    <input type="number" id="puntualidad-actual" class="field-input" placeholder="Act %" required />
-                    <input type="number" id="puntualidad-anterior" class="field-input" placeholder="Ant %" required />
-                  </div>
-                </div>
-              </div>
-
-              <div class="field-group" style="margin-top:10px;">
-                <div class="field">
-                  <label class="field-label">NPS (Satisfacción)</label>
-                  <div class="input-with-unit">
-                    <input type="number" id="nps-actual" class="field-input" placeholder="Act" required />
-                    <input type="number" id="nps-anterior" class="field-input" placeholder="Ant" required />
-                  </div>
-                </div>
-                <div class="field">
-                  <label class="field-label">Quejas Abiertas</label>
-                  <div class="input-with-unit">
-                    <input type="number" id="quejas-actuales" class="field-input" placeholder="Act" required />
-                    <input type="number" id="quejas-anteriores" class="field-input" placeholder="Ant" required />
-                  </div>
+                  <label for="servicio-anterior" class="field-label">Servicio Anterior (%)</label>
+                  <input type="number" id="servicio-anterior" class="field-input" placeholder="0-100" min="0" max="100" required>
                 </div>
               </div>
             </div>
             
-            <button type="submit" class="btn-eval" id="btn-eval">
-                PROCESAR INFORMACIÓN Y EVALUAR
+            <button type="submit" class="btn-eval" style="width: 100%; margin-top: 10px;" aria-label="Evaluar riesgo">
+                PROCESAR ANÁLISIS
             </button>
           </form>
         </article>
 
-        <article class="card result-card">
+        <article class="card result-card" role="region" aria-labelledby="diag-title">
           <div class="card-header">
-            <div class="card-icon">02</div>
-            <div>
-              <h2 class="card-title">Diagnóstico IA</h2>
-              <p class="card-sub">Estado actual y acciones sugeridas</p>
-            </div>
+            <div class="card-icon" aria-hidden="true">02</div>
+            <h2 id="diag-title" class="card-title">Diagnóstico IA</h2>
           </div>
           
-          <div id="resultado-area">
-             <div class="empty-state">
-                <p>Esperando datos para análisis...</p>
-             </div>
+          <div id="resultado-area" aria-live="assertive" style="min-height: 80px; margin-bottom: 20px;">
+             <p class="empty-state" style="color: #666; text-align: center; padding: 20px;">Esperando datos para análisis...</p>
           </div>
 
-          <div class="chart-container" style="margin-top: 20px; height: 180px; position: relative;">
+          <div class="chart-container" style="position: relative; height: 200px; background: rgba(0,0,0,0.2); padding: 15px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05);">
             <canvas id="riskChart"></canvas>
-            <div class="chart-center-label">
-                <span id="kpi-total">0</span>
-                <small>TOTAL</small>
+            <div class="chart-center-label" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
+                <span id="kpi-total" style="font-size: 28px; font-weight: 900; color: #c8e000; display: block;">0</span>
+                <small style="display: block; font-size: 10px; color: #888; letter-spacing: 1px; font-weight: bold;">TOTAL</small>
             </div>
           </div>
 
-          <div class="mini-kpis" style="display: flex; justify-content: space-around; margin-top: 15px; text-align: center;">
-            <div style="color: #2ecc71;"><strong>V:</strong> <span id="kpi-verde">0</span></div>
-            <div style="color: #f5a623;"><strong>A:</strong> <span id="kpi-amarillo">0</span></div>
-            <div style="color: #e8453c;"><strong>R:</strong> <span id="kpi-rojo">0</span></div>
+          <div class="mini-kpis" style="display: flex; justify-content: space-around; margin-top: 15px; border-top: 1px solid #333; padding-top: 15px;">
+            <div style="text-align:center;"><small style="color:#888; display:block;">BAJO</small><span id="kpi-verde" style="color:#2ecc71; font-weight:bold;">0</span></div>
+            <div style="text-align:center;"><small style="color:#888; display:block;">MEDIO</small><span id="kpi-amarillo" style="color:#f5a623; font-weight:bold;">0</span></div>
+            <div style="text-align:center;"><small style="color:#888; display:block;">ALTO</small><span id="kpi-rojo" style="color:#e8453c; font-weight:bold;">0</span></div>
           </div>
         </article>
       </div>
 
       <section class="card history-section" style="margin-top: 20px;">
-        <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
-          <h2 class="card-title">Historial de Riesgo</h2>
+        <div class="card-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+          <h2 class="card-title">Historial Operativo</h2>
+          
+          <div style="flex-grow: 1; max-width: 300px;">
+            <input type="text" id="busqueda-cliente" onkeyup="filtrarEmpresas()" 
+                   placeholder="🔍 Buscar empresa..." aria-label="Buscar empresa en el historial" 
+                   style="width: 100%; padding: 10px; border-radius: 8px; background: #1a1a1a; color: white; border: 1px solid #c8e000;">
+          </div>
+
           <div class="excel-actions">
-            <label for="excel-file" class="btn-excel-label">📂 Carga Masiva Excel</label>
-            <input type="file" id="excel-file" accept=".xlsx, .xls" hidden />
+            <label for="excel-file" class="btn-excel-label" style="background: #c8e000; color: black; padding: 10px 15px; border-radius: 8px; font-weight: bold; cursor: pointer; display: inline-block;">
+                📂 CARGAR EXCEL
+            </label>
+            <input type="file" id="excel-file" accept=".xlsx, .xls" hidden>
           </div>
         </div>
 
-        <div class="table-container">
-          <table class="history-table" style="width: 100%;">
+        <div class="table-container" style="overflow-x: auto; margin-top: 15px;">
+          <table class="history-table" style="width: 100%; border-collapse: collapse;">
             <thead>
-              <tr>
-                <th>Cliente</th>
-                <th>Periodos</th>
-                <th>Riesgo</th>
-                <th>Acción</th>
+              <tr style="text-align: left; border-bottom: 2px solid #333; color: #c8e000; font-size: 12px;">
+                <th style="padding: 12px;">CLIENTE</th>
+                <th style="padding: 12px;">CIUDAD</th>
+                <th style="padding: 12px;">PERIODO</th>
+                <th style="padding: 12px;">ESTADO</th>
+                <th style="padding: 12px; text-align: center;">ACCIONES</th>
               </tr>
             </thead>
-            <tbody id="history-body"></tbody>
+            <tbody id="history-body" aria-live="polite">
+                </tbody>
           </table>
         </div>
       </section>
     </main>
 
-    <footer class="ftr">
-      <p>Fundación Traxión · Hackatón Bécalos Tech 2026 · <strong>Equipo UTC</strong></p>
+    <footer class="ftr" style="text-align: center; padding: 25px; color: #444; font-size: 11px;">
+      <p>Fundación Traxión · Alondra Saucedo · Bécalos Tech 2026</p>
     </footer>
   </div>
 
